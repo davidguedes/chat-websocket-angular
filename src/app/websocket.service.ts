@@ -17,7 +17,6 @@ export class WebsocketService {
 
   createConnection() {
     // Conectar ao servidor Socket.IO
-    console.log('url: ', environment.apiURL);
     this.socket = io(`${environment.apiURL}`);
 
     this.socket.on('connect', () => {
@@ -30,6 +29,10 @@ export class WebsocketService {
     this.socket.emit('message', dataMessage);
   }
 
+  sendPrivateMessage(dataMessage: any) {
+    this.socket.emit('private_message', dataMessage);
+  }
+
   // Receber mensagens do servidor
   onMessage(): Observable<string> {
     return new Observable((observer) => {
@@ -38,5 +41,19 @@ export class WebsocketService {
         observer.next(dataMessage);
       })
     })
+  }
+
+  // Enviar nome do novo usuário para o servidor
+  sendNewUser(name: string) {
+    this.socket.emit('new_user_name', name);
+  }
+
+  onNewUser(): Observable<string> {
+    return new Observable((observer) => {
+      this.socket.on('new_user_name', (user) => {
+        console.log('user', user);
+        observer.next(user);
+      });
+    });
   }
 }

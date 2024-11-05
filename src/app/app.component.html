@@ -1,15 +1,33 @@
 <div class="container">
   <div class="chat-box">
+    <div class="identify">Meu ID: <strong>{{websocketService.socketId()}}</strong></div>
+    <div class="header">
+      <input type="text" autofocus [(ngModel)]="name" [disabled]="savedName" (keydown.enter)="saveName()" placeholder="Digite seu nome" />
+      <button (click)="saveName()" [disabled]="savedName">Salvar</button>
+    </div>
     <div class="messages">
       @for(message of messages; track message.id_message) {
-        <div class="message new-message" [ngClass]="{'from-me': message.from_me}">
-          <p>{{ message.mensagem }}</p>
-        </div>
+        @if(message.new_user) {
+          <div class="message new-user">
+            <p>{{message.name_user}} entrou no chat.</p>
+          </div>
+        } @else {
+          <div class="message new-message" [ngClass]="{'from-me': message.from_me, 'private': message.private}">
+            <span>{{message.name_user}}:</span>
+            <p>{{ message.mensagem }}</p>
+          </div>
+        }
       }
     </div>
     <div class="input-area">
-      <input (keydown.enter)="sendMessage()" type="text" [(ngModel)]="newMessage" placeholder="Digite uma mensagem">
+      <input [disabled]="!savedName" (keydown.enter)="sendMessage()" type="text" [(ngModel)]="newMessage" placeholder="Digite uma mensagem" />
       <button (click)="sendMessage()">Enviar</button>
     </div>
+  </div>
+
+  <div class="private-message">
+    <input [(ngModel)]="toUser" placeholder="ID do destinatário" />
+    <input [(ngModel)]="newPrivateMessage" (keydown.enter)="sendPrivateMessage()" placeholder="Mensagem privada" />
+    <button [disabled]="!savedName" (click)="sendPrivateMessage()">Enviar</button>
   </div>
 </div>

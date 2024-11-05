@@ -25,8 +25,11 @@ export class AppComponent implements OnInit {
 
   title = 'chat-websocket-angular';
   name: string = '';
+  savedName: boolean = false;
   newMessage: string = '';
   messages: messageChat[] = [];
+  newPrivateMessage: string = '';
+  toUser: string = '';
 
   protected websocketService = inject(WebsocketService);
 
@@ -39,10 +42,25 @@ export class AppComponent implements OnInit {
         new_user: false,
         from_me: dataMessage.user_id == this.websocketService.socketId() ? true : false,
         user_id: dataMessage.user,
-        id_message: `${dataAtual.getTime}${dataMessage.user}`,
+        id_message: `${dataAtual.getTime()}${dataMessage.user}`,
         private: dataMessage.private ?? false
       })
-    })
+
+      console.log('messageS: ', this.messages);
+    });
+
+    this.websocketService.onNewUser().subscribe((user: any) => {
+      console.log('name: ', user);
+      let dataAtual = new Date();
+      this.messages.push({
+        mensagem: '',
+        name_user: user.user,
+        new_user: true,
+        from_me: false,
+        id_message: `${dataAtual.getTime()}${user.user}`,
+        user_id: ''
+      });
+    });
   }
 
   // Enviar mensagem
@@ -54,6 +72,29 @@ export class AppComponent implements OnInit {
         user_id: this.websocketService.socketId()
       })
       this.newMessage = '';
+    }
+  }
+
+  saveName() {
+    if(this.savedName) return
+
+    if(this.name.length < 3) {
+      alert('Nome precisa ter pelo menos 3 caracteres!');
+      return
+    }
+
+    this.savedName = true;
+    this.websocketService.sendNewUser(this.name);
+  }
+
+  sendPrivateMessage() {
+    if (this.newPrivateMessage.trim()) {
+      this.websocketService.sendPrivateMessage({ 
+        privateMessage: this.newPrivateMessage
+        , user: this.name
+        , user_id: this.websocketService.socketId()
+        , to: [this.toUser, this.websocketService.socketId()]});
+      this.newPrivateMessage = '';
     }
   }
 }
