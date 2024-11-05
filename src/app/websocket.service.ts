@@ -17,7 +17,9 @@ export class WebsocketService {
 
   createConnection() {
     // Conectar ao servidor Socket.IO
-    this.socket = io(`${environment.apiURL}`);
+    this.socket = io(`${environment.apiURL}`, {
+      withCredentials: true
+    });
 
     this.socket.on('connect', () => {
       this.socketIdWritable.set(this.socket.id ?? '')
