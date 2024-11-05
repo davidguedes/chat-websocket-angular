@@ -16,9 +16,10 @@ export class WebsocketService {
   }
 
   createConnection() {
-    // Conectar ao servidor Socket.IO
-    this.socket = io(`${environment.apiURL}`, {
-      withCredentials: true
+    // Conectar ao servidor Socket.IO ${environment.apiURL}
+    this.socket = io(`https://ws-chat-websocket.vercel.app`, {
+      withCredentials: true,
+      transports: ['websocket']
     });
 
     this.socket.on('connect', () => {
