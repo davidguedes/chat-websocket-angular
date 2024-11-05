@@ -1,0 +1,175 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #d0e7f9; /* Fundo azul claro do MSN */
+  }
+  
+  .chat-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 2px solid #87ceeb;
+  }
+  
+  .identify {
+    padding: 10px;
+    text-align: center;
+    background-color: #87ceeb;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .header {
+    display: flex;
+    padding: 10px;
+    background-color: #87ceeb;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .header input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #e6f7ff;
+  }
+  
+  .header button {
+    padding: 8px 12px;
+    background-color: #2a73cc;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .messages {
+    flex: 1;
+    min-height: 400px;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-image: url('https://www.transparenttextures.com/patterns/gplay.png'); /* Textura sutil para efeito retrô */
+  }
+  
+  .message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+  }
+  
+  .message.new-user {
+    align-self: center;
+    p {
+      background-color: #e0f7fa;
+      padding: 8px;
+      border-radius: 4px;
+      color: #00796b;
+      font-style: italic;
+    }
+  }
+  
+  .message.new-message {
+    max-width: 70%;
+    display: inline-block;
+    border-radius: 15px;
+    padding: 10px;
+    color: #333;
+  }
+  
+  .message.new-message p {
+    background-color: #f0f0f0;
+    padding: 8px;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  .message.new-message.from-me {
+    align-self: flex-end;
+  
+    p {
+      background-color: #dcf8c6;
+      color: #2d3436;
+    }
+  }
+  
+  .message.new-message.private {
+    p {
+      background-color: #ffa3a3!important;
+    }
+  }
+  
+  .message.new-message span {
+    font-weight: bold;
+    color: #333;
+    font-size: 0.9em;
+  }
+  
+  .input-area {
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+    background-color: #fafafa;
+    border-top: 1px solid #ddd;
+  }
+  
+  .input-area input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+  }
+  
+  .input-area button {
+    padding: 8px 12px;
+    background-color: #87ceeb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .private-message {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .private-message input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+  }
+  
+  .private-message button {
+    padding: 8px 12px;
+    background-color: #d32f2f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
