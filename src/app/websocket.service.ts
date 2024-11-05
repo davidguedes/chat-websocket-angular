@@ -18,7 +18,8 @@ export class WebsocketService {
   createConnection() {
     // Conectar ao servidor Socket.IO
     this.socket = io(`${environment.apiURL}`, {
-      transports: ['websocket']
+      transports: ['websocket'],
+      withCredentials: true
     });
 
     this.socket.on('connect', () => {
