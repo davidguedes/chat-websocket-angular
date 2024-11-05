@@ -19,8 +19,7 @@ export class WebsocketService {
     // Conectar ao servidor Socket.IO
     console.log('url: ', environment.apiURL);
     this.socket = io(`${environment.apiURL}`, {
-      transports: ['websocket', 'polling', 'flashsocket'],
-      withCredentials: true,
+      transports: ['websocket']
     });
 
     this.socket.on('connect', () => {
