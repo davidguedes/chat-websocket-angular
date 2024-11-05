@@ -19,6 +19,7 @@ export class WebsocketService {
     // Conectar ao servidor Socket.IO
     console.log('url: ', environment.apiURL);
     this.socket = io(`${environment.apiURL}`, {
+      path: "/my-custom-path/",
       transports: ['websocket']
     });
 
